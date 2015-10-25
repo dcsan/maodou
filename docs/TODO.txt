@@ -2,11 +2,37 @@ TODO
 
 X React overall layout
 
-sending data via the API
+-----------------------------
+# reactivity low level
+ReactiveVar, Tracker, etc
+
+# ReactJS deeper dive
+styling/CSS
+events
+sub-components
+animation: D3, velocity etc.
+
+# animations
+D3, famous
+
+# ReactNative
+demo and examples
+
+# Packages
+writing your own packages
+structuring an app as entirely packages
+
+-----------------------------
 
 better front-end template engine
-	http://touchstonejs.io/ or http://reapp.io/
+	http://touchstonejs.io/
+	http://reapp.io/
 
 responding (sending data via react to DB)
 
+# Wechat API
+sending data via the API
+
 test commit
+
+# Deployment

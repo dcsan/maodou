@@ -2,7 +2,7 @@
 =========================
 create a basic skeleton app
 remove autopublish
-add the packages we're going to use: 
+add the packages we're going to use:
 	stylus
 
 
@@ -53,7 +53,7 @@ http://www.bradcypert.com/a-brief-comparison-of-flowrouter-and-iron-router-for-m
 careful with numbers in routes - using parseInt
 
 handling authentication and logged out users
-{{#if currentUser}} 
+{{#if currentUser}}
 
 ssr with `WebApp`
 server side responses
@@ -88,7 +88,7 @@ same collection publishing in different ways
 eg data and a count
 
 
-dynamic collections - 
+dynamic collections -
 	not backed by a Mongo collection
 	using these to send data from client to server
 	using `.added(), .change() removed()` etc.
@@ -130,7 +130,7 @@ publishing a package for others to use it
 =========================
 basic demo with a Session
 reactive collections/pubsub
-
+tracker
 
 # Testing
 =========================
@@ -166,7 +166,7 @@ meteor wraps async calls in FIbers, to make them look synchronous
 =========================
 minimize the file size!
 important to get rendering as small as possible
-a minimal meteor app 
+a minimal meteor app
 	app w/ blaze: 115k production
 	blaze (dev) 51k
 
@@ -178,7 +178,7 @@ flowrouter +
 
 Other/Advanced topics
 =========================
-the fast development stack: 
+the fast development stack:
 using jade, stylus, coffee
 typescript overview
 
@@ -239,8 +239,8 @@ Fibers + future - for simple client side scripts
 
 ```
 // wait for 5 seconds
-var Future = Npm.require('fibers/future'); 
-var future = new Future(); 
+var Future = Npm.require('fibers/future');
+var future = new Future();
 Meteor.setTimeout(function() {
 	future.return(); }, 5 * 1000); future.wait();
 }
@@ -256,6 +256,3 @@ using Famous w meteor?
 check MeteorPedia for other tips
 
 ionic template pattern
-
-
-
