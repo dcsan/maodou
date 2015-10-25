@@ -1,0 +1,10 @@
+TODO
+
+X React overall layout
+
+sending data via the API
+
+better front-end template engine
+	http://touchstonejs.io/ or http://reapp.io/
+
+responding (sending data via react to DB)
