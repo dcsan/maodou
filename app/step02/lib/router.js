@@ -19,3 +19,12 @@ FlowRouter.route('/players', {
 		ReactLayout.render(PlayerListComponent)
 	}
 });
+
+FlowRouter.route('/players/:username', {
+	action: function(params, queryParams) {
+		ReactLayout.render(ChatlogComponent,
+			{
+				myname: params.username
+			})
+	}
+});
