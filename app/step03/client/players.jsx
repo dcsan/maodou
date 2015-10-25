@@ -4,6 +4,7 @@ PlayerListComponent = React.createClass({
 
 	getInitialState() {
 		return {};
+		// blah
 	},
 
 	getMeteorData() {
@@ -18,7 +19,9 @@ PlayerListComponent = React.createClass({
 			var url = "/chatlogs/" + player.username;
 			var str =
 				<div className="playerLine">
-					<a href={url}>{player.username}</a>
+					<span style={{color:'red'}} key={player.key}>
+						*** <a href={url}>{player.username}</a>
+					</span>
 				</div>
 			return str;
 		})
