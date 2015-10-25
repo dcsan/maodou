@@ -1,0 +1,261 @@
+# setup
+=========================
+create a basic skeleton app
+remove autopublish
+add the packages we're going to use: 
+	stylus
+
+
+# Templates
+=========================
+partials
+expressions
+block helpers
+
+
+using layouts and yield
+
+lifecycle events
+.rendered event
+
+## extra
+reactive data and rendered event
+playing animations on page load
+template instances
+template subscriptions
+
+two types of meteor template block formats
+see Ionic template patterns
+
+
+# Helpers
+=========================
+returning variables, arrays and functions
+passing a value to a helper method
+
+
+# Routing
+=========================
+client routes
+server side routes with Picker?
+
+FlowRouter vs IronRouter
+
+flowrouter events
+calling a template to render
+dynamic templates
+
+## extra topics
+
+groups of routes
+http://www.bradcypert.com/a-brief-comparison-of-flowrouter-and-iron-router-for-meteor-js/
+
+careful with numbers in routes - using parseInt
+
+handling authentication and logged out users
+{{#if currentUser}} 
+
+ssr with `WebApp`
+server side responses
+
+
+# Collections
+=========================
+loading Sample data
+Collection2 / extensions
+using `meteor mongo` and Robomongo to browse/check data
+
+using external/remote mongoDB
+sharing a mongoDB with a node application
+
+cursors: findOne vs .fetch()
+passing iterable data to the template
+
+
+# Data and Pub/Sub
+=========================
+where best to subscribe?
+template level subscriptions
+template instances
+
+filtering and limit items on publication
+sorting on client and server
+counting
+
+you can only pubish a cursor
+
+same collection publishing in different ways
+eg data and a count
+
+
+dynamic collections - 
+	not backed by a Mongo collection
+	using these to send data from client to server
+	using `.added(), .change() removed()` etc.
+
+
+# Reactive Data
+=========================
+using your own ReactiveVar
+Tracker.autorun
+
+
+# Meteor methods
+=========================
+calling methods server side for data processing, summaries etc.
+
+
+Authentication and Meteor.user
+=========================
+adding a custom login method
+customising what fields to send to the client
+
+using a "guest" login method and creating a user on the fly
+cookies and meteor
+
+
+# Packages
+=========================
+create a package
+developing an app as a set of packages
+bundling code in packages
+disabling a package
+
+using NPM packages
+
+publishing a package for others to use it
+
+
+# reactivity
+=========================
+basic demo with a Session
+reactive collections/pubsub
+
+
+# Testing
+=========================
+basic testing of code in packages using tinytest
+
+
+# Forms
+=========================
+AutoForm and Collection2
+
+
+Design and client side CSS templates
+=========================
+bootstrap, ionic, ...
+famous
+
+
+# Animation
+=========================
+velocityJS
+firing from `template.rendered()` event
+
+avoid modifying the DOM structure
+you can use meteor's version of JQuery to add/modify things
+
+
+# calling external APIs
+=========================
+meteor wraps async calls in FIbers, to make them look synchronous
+
+
+# rendering for WeChat
+=========================
+minimize the file size!
+important to get rendering as small as possible
+a minimal meteor app 
+	app w/ blaze: 115k production
+	blaze (dev) 51k
+
+flowrouter +
+	nothing = 107kb
+	blaze = 123k
+	react = 153k
+
+
+Other/Advanced topics
+=========================
+the fast development stack: 
+using jade, stylus, coffee
+typescript overview
+
+checking final size with `run --production`
+
+meteor shell
+
+Using a node app/package for faster deployment and iteration
+
+latency compensation
+
+`Meteor.check` - checking your arguments
+using classes to check more complex argument objects
+
+calling external APIs
+HTTP.get
+
+embedding markdown
+
+* Mongo DB data strategies
+joins
+denormalization
+reactive joins
+client vs server side joins
+
+
+Building an app
+=========================
+WeChat simple app
+
+
+TODO
+=========================
+
+## check moflow size
+
+collection helper?
+defining classes for your logic?
+ES5 syntax and collection helper
+transform feature
+
+
+## binding webpage to main account page
+WeChat account to the data
+
+
+nGrok for wechat development?
+
+raw collections with added/changed/removed/observe
+http://docs.meteor.com/#/full/publishandsubscribe
+
+meteor has WeChat login?
+how to use? for a webpage?
+
+autoform works with React?
+
+Fibers + future - for simple client side scripts
+
+```
+// wait for 5 seconds
+var Future = Npm.require('fibers/future'); 
+var future = new Future(); 
+Meteor.setTimeout(function() {
+	future.return(); }, 5 * 1000); future.wait();
+}
+```
+
+bindEnvironment
+
+Joins, reactive joins
+
+using Famous w meteor?
+
+
+check MeteorPedia for other tips
+
+ionic template pattern
+
+
+
