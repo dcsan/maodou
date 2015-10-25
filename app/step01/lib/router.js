@@ -6,9 +6,12 @@ FlowRouter.route('/', {
 });
 
 
-FlowRouter.route('/home/:username', {
+FlowRouter.route('/home/:username/:special?', {
 	action: function(params, queryParams) {
 		console.log("route> home", params);
-		ReactLayout.render(HomeComponent, {username: params.username})
+		ReactLayout.render(HomeComponent, {
+			static: "static",
+			username: params.username
+		})
 	}
 });
