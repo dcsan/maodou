@@ -23,3 +23,20 @@
   opacity: 0.01;
   transition: opacity 300ms ease-in;
 }
+
+
+.tile-appear {
+  position: absolute;
+  opacity: 0.01;
+  transform: rotate(0deg);
+  -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
+}
+
+.tile-appear.tile-appear-active {
+  position: absolute;
+  opacity: 1;
+  transition: opacity 2s ease-in;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+
+}

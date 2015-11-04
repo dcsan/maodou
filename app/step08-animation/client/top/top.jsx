@@ -1,4 +1,4 @@
-var AnimationGroup = React.addons.CSSTransitionGroup;
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 TopComponent = React.createClass({
 
@@ -9,7 +9,7 @@ TopComponent = React.createClass({
         <li>
           <a href='/players'>/players</a>
 
-          <AnimationGroup transitionName="example" transitionAppear={true} transitionEnterTimeout={500} transitionLeaveTimeout={300} >
+          <ReactCSSTransitionGroup transitionName="tile" transitionAppear={true} transitionEnterTimeout={500} transitionLeaveTimeout={300} >
 
             <div className='bigbox'>
               hello 1
@@ -18,7 +18,7 @@ TopComponent = React.createClass({
               hello 2
             </div>
 
-          </AnimationGroup>
+          </ReactCSSTransitionGroup>
 
         </li>
       </ul>
