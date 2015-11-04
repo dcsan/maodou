@@ -34,13 +34,14 @@ MaterialApp = React.createClass({
       };
     },
 
+
     render: function () {
         return (
             <AppCanvas>
                 <AppBar
                   title="Title"
-                  iconElementLeft={<IconButton><NavigationClose /></IconButton>}
-                  iconElementRight={<IconButton><NavigationClose /></IconButton>}
+                  iconElementLeft={<IconButton></IconButton>}
+                  iconElementRight={<IconButton></IconButton>}
                 />
 
                 <div style={{padding: '80px',}}>
