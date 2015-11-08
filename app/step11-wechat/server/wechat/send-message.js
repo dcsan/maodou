@@ -42,8 +42,8 @@ function sendMessageToUser(username, content){
 function sendNews(openid, content) {
   var player = Players.findOne({openid: openid});
   var title = "News for " + player.nickname;
-  var description = "custom news every day!";
-
+  var description = content;
+  var url = process.env.APP_DOMAIN + "/chatlogs/" + player.nickname;
   var params = {
         "touser":player.openid,
         "msgtype":"news",
@@ -52,7 +52,7 @@ function sendNews(openid, content) {
              {
                  "title": title,
                  "description": description,
-                 //  "url":"URL",
+                  "url": url,
                  "picurl": player.headimgurl
              },
             //  {
