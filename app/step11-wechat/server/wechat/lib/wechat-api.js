@@ -1,9 +1,14 @@
 
+var APP_ID = process.env.WECHAT_APP_ID;
+var APP_SECRET = process.env.WECHAT_APP_SECRET;
+
+
 WechatAPI = function(options){
+    console.log("wechat api options", options);
     this.API_ENDPOINT = "https://api.weixin.qq.com";
-    this._http = options.http || Meteor.http;
-    this._app_id = options.app_id;
-    this._app_secret = options.app_secret;
+    this._http = Meteor.http;
+    this._app_id = APP_ID;
+    this._app_secret = APP_SECRET;
 }
 
 WechatAPI.prototype = {
@@ -83,6 +88,7 @@ WechatAPI.prototype = {
     refreshAccessToken: function(){
       console.log("before refresh ----");
       var result = this.getAccessToken();
+      console.log("refreshAccessToken got result data", result.data);
 
       WechatTokens.saveAccessToken(this._app_id, result.data.access_token, result.data.expires_in);
       console.log("after refresh ----");

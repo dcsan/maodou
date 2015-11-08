@@ -1,11 +1,11 @@
 var APP_ID = process.env.WECHAT_APP_ID;
 var APP_SECRET = process.env.WECHAT_APP_SECRET;
 
-var params = {app_id:APP_ID, app_secret:APP_SECRET}
+var params = {app_id:APP_ID, app_secret:APP_SECRET};
 var wechatApi = new WechatAPI(params);
 
 Meteor.methods({
-  	'Wechat/sendMsgToUser': function(username, content) {
+    'Wechat/sendMsgToUser': function(username, content) {
 
       // save to db
       Chatlogs.sendMessageFromServer(username, content);
