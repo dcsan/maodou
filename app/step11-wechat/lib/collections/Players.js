@@ -17,8 +17,8 @@ Players.reset = function() {
 Players.getPlayerInfo = function(openid) {
   // https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
   var player = WechatObject.getUserInfoOpenId(openid);
-
-  return {username: "testuser"};
+  console.log("getPlayerInfo for", openid, player);
+  return player;
 }
 
 Players.create = function(options) {
@@ -32,7 +32,8 @@ Players.create = function(options) {
   // else create
   var playerInfo = Players.getPlayerInfo(options.openid);
   var options = {
-    username: playerInfo.username,
+    // username: playerInfo.username,
+    nickname: playerInfo.nickname,
     openid: options.openid
   }
   Players.insert(options);

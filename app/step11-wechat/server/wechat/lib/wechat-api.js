@@ -30,13 +30,35 @@ WechatAPI.prototype = {
             grant_type: "authorization_code"
         });
     },
+
+    // {
+    //     "subscribe": 1,
+    //     "openid": "o6_bmjrPTlm6_2sgVt7hMZOPfL2M",
+    //     "nickname": "Band",
+    //     "sex": 1,
+    //     "language": "zh_CN",
+    //     "city": "广州",
+    //     "province": "广东",
+    //     "country": "中国",
+    //     "headimgurl":    "http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/0",
+    //    "subscribe_time": 1382694957,
+    //    "unionid": " o6_bmasdasdsad6_2sgVt7hMZOPfL"
+    //    "remark": "",
+    //    "groupid": 0
+    // }
+
     getUserInfoOpenId: function(openId){
       var accessToken = this.getAccessTokenStr();
-      return this._get(this.API_ENDPOINT + "/sns/userinfo", {
+      // https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
+      var res = this._get(this.API_ENDPOINT + "/cgi-bin/user/info", {
         access_token: accessToken,
         openid: openId
       });
+      var data = JSON.parse(res);
+      console.log("getUserInfoOpenId", res, data);
+      return data;
     },
+
     refreshWebAccessToken: function(refreshToken){
         return this._get(this.API_ENDPOINT + "/sns/oauth2/refresh_token", {
             appid: this._app_id,
@@ -44,9 +66,11 @@ WechatAPI.prototype = {
             refresh_token: refreshToken
         });
     },
+
     generateNonce: function(){
         return Math.random().toString(36).substr(2, 15);
     },
+
     getJSSDKSig: function (nonceStr, jsapi_ticket, timestamp, url) {
         // Code borrowed from npm package "wechat-api"
         function raw(args) {
