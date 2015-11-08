@@ -16,19 +16,20 @@ Players.reset = function() {
 
 Players.getPlayerInfo = function(openid) {
   // https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
+  return {username: "testuser"};
 }
 
 Players.create = function(options) {
 
   var p = Players.find({openid: options.openid});
-  if (!p) {
-    var playerInfo = Players.getPlayerInfo(options.openid);
-    Players.insert({
-      username: playerInfo.username,
-      openid: options.openid
-    })
+  if (p) {return;}
 
-  }
+  // else create
+  var playerInfo = Players.getPlayerInfo(options.openid);
+  Players.insert({
+    username: playerInfo.username,
+    openid: options.openid
+  })
 
 }
 
