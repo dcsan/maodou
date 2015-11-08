@@ -41,7 +41,7 @@ Chatlogs.reset = function() {
 
 if (Meteor.isServer) {
   Meteor.startup( function() {
-    Chatlogs.reset();
+    // Chatlogs.reset();
     Meteor.publish("Chatlogs", function(opts={}) {
       console.log("subscribe Chatlogs", opts);
       return Chatlogs.find(opts);

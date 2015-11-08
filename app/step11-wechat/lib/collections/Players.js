@@ -6,10 +6,19 @@ Players.reset = function() {
 
   var names = ["alpha", "beta", "charles", "david", "eric"];
 
-  names.map( username => {
-    Players.insert(
-      {username: username}
-    );
+  var testData = [
+    {
+      username: 'dc-san',
+      openid: 'oEdIzuBk5MmYQFAOIbjMm5tvWQ2U'
+    },
+    {
+      username: '李明',
+      openid: 'oEdIzuGXZRZ2mWPQaPRhhWXwUJww'
+    }
+  ]
+
+  testData.map( obj => {
+    Players.insert(obj);
   })
 
 }

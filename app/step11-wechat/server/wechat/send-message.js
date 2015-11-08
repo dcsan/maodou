@@ -14,9 +14,12 @@ Meteor.methods({
     //   return sendNews(username, content);
     // },
 
-    // TODO refactor to use openid
     'wc/news': function(openid, content) {
       return sendNews(openid, content);
+    },
+
+    'wc/text': function(openid, content) {
+      return sendText(openid, content);
     }
 
 });
@@ -36,6 +39,24 @@ function sendMessageToUser(username, content){
 
   WechatObject.sendMessageToUser(params);
 
+  return 'ok';
+}
+
+
+function sendText(openid, content){
+  var player = Players.findOne({openid: openid});
+
+  var params = {
+    touser: openid,
+    msgtype: 'text',
+    text: {
+      content: content
+    }
+  };
+  WechatObject.sendMessageToUser(params);
+  params.text = content;
+  params.username = player.username;
+  Chatlogs.insert(params);
   return 'ok';
 }
 
@@ -65,5 +86,10 @@ function sendNews(openid, content) {
         }
     }
     WechatObject.sendMessageToUser(params);
+
+    // FIXME - update all for consistency
+    params.username = player.username;
+    params.text = description;
+    Chatlogs.insert(params);
 
 }
