@@ -2,7 +2,6 @@
 var APP_ID = process.env.WECHAT_APP_ID;
 var APP_SECRET = process.env.WECHAT_APP_SECRET;
 
-console.log("Meteor.http", HTTP);
 
 WechatAPI = function(options){
     console.log("wechat api options", options);
@@ -11,6 +10,7 @@ WechatAPI = function(options){
     this._app_id = APP_ID;
     this._app_secret = APP_SECRET;
 }
+
 
 WechatAPI.prototype = {
     _get: function(url, params){
@@ -30,11 +30,12 @@ WechatAPI.prototype = {
             grant_type: "authorization_code"
         });
     },
-    getUserInfoOpenId: function(accessToken, openId){
-        return this._get(this.API_ENDPOINT + "/sns/userinfo", {
-            access_token: accessToken,
-            openid: openId
-        });
+    getUserInfoOpenId: function(openId){
+      var accessToken = this.getAccessTokenStr();
+      return this._get(this.API_ENDPOINT + "/sns/userinfo", {
+        access_token: accessToken,
+        openid: openId
+      });
     },
     refreshWebAccessToken: function(refreshToken){
         return this._get(this.API_ENDPOINT + "/sns/oauth2/refresh_token", {
@@ -96,6 +97,20 @@ WechatAPI.prototype = {
       return res;
     },
 
+    // FIXME - nearly duplicate method
+    refreshToken: function(appId){
+
+      // var result = WechatObject.getAccessToken();
+      var result = WechatObject.getAccessTokenStr();
+      // if(result.data != undefined){
+      if(result != undefined){
+        WechatTokens.saveAccessToken(appId, result, 7200);
+      } else {
+        console.error('get access_token error.');
+      }
+
+    },
+
     refreshAccessToken: function(){
       console.log("refreshAccessToken refresh ----");
       var result = this.getAccessToken();
@@ -108,35 +123,37 @@ WechatAPI.prototype = {
       return result.data.access_token;
     },
 
-      getJSSDKTicket: function(accessToken){
-          return this._get(this.API_ENDPOINT + "/cgi-bin/ticket/getticket", {
-              access_token: accessToken,
-              type: "jsapi"
-          });
-      },
-      getJSSDKConfig: function(url, jsApiList, debug){
-          // var accessToken = "zcHbiDcboen-wj4b-1efFvEpFvECWWhkTBj9pTrRuOR57xCR3C-oikHAp4DNVJsfLOcdstrGTL1_GYnlbRF38NCOgrL9ZMoMx7Pnj_Q4cgcUYAgAIAPTV";
-          // var accessToken = this.getAccessTokenStr();
-          var accessToken = '1';
-          var response = this.getJSSDKTicket(accessToken);
-          var debug = !!debug;
-          var ticket = response.data;
-          if(ticket == undefined || ticket.errcode != 0){
-              console.err("cannot get ticket, response is: ", response);
-              return;
-          }
-          var nonce = this.generateNonce();
-          var timestamp = Math.floor(new Date().getTime() / 1000);
-          var sig = this.getJSSDKSig(nonce, ticket.ticket, timestamp, url);
-          return {
-              debug: debug,
-              appid: this._app_id,
-              timestamp: timestamp,
-              nonceStr: nonce,
-              signature: sig,
-              jsApiList: jsApiList
-          }
-      },
+    getJSSDKTicket: function(accessToken){
+        return this._get(this.API_ENDPOINT + "/cgi-bin/ticket/getticket", {
+            access_token: accessToken,
+            type: "jsapi"
+        });
+    },
+
+    getJSSDKConfig: function(url, jsApiList, debug){
+        // var accessToken = "zcHbiDcboen-wj4b-1efFvEpFvECWWhkTBj9pTrRuOR57xCR3C-oikHAp4DNVJsfLOcdstrGTL1_GYnlbRF38NCOgrL9ZMoMx7Pnj_Q4cgcUYAgAIAPTV";
+        // var accessToken = this.getAccessTokenStr();
+        var accessToken = '1';
+        var response = this.getJSSDKTicket(accessToken);
+        var debug = !!debug;
+        var ticket = response.data;
+        if(ticket == undefined || ticket.errcode != 0){
+            console.err("cannot get ticket, response is: ", response);
+            return;
+        }
+        var nonce = this.generateNonce();
+        var timestamp = Math.floor(new Date().getTime() / 1000);
+        var sig = this.getJSSDKSig(nonce, ticket.ticket, timestamp, url);
+        return {
+            debug: debug,
+            appid: this._app_id,
+            timestamp: timestamp,
+            nonceStr: nonce,
+            signature: sig,
+            jsApiList: jsApiList
+        }
+    },
+
     getAccessTokenStr: function(){
         var appId = this._app_id;
         var token = WechatTokens.findOne({appId: appId});
@@ -163,11 +180,11 @@ WechatAPI.prototype = {
     getAppId: function(){
         return this._app_id;
     },
+
     sendMessageToUser: function(dataObject){
       var accessToken = this.getAccessTokenStr();
       console.log("accessToken:" + accessToken);
       console.log("accessToken:" + JSON.stringify(dataObject, {indent: true}));
-
 
       var url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=" + accessToken;
       HTTP.post(url, {data: dataObject}, function(error, result){
@@ -181,3 +198,12 @@ WechatAPI.prototype = {
     },
 
 }
+
+// global used instance
+WechatObject = {}
+
+Meteor.startup(function(){
+  var params = {app_id:APP_ID, app_secret:APP_SECRET};
+  WechatObject = new WechatAPI(params);
+  WechatObject.refreshToken(APP_ID);
+});
