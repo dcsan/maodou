@@ -54,9 +54,9 @@ WechatAPI.prototype = {
         access_token: accessToken,
         openid: openId
       });
-      var data = JSON.parse(res);
-      console.log("getUserInfoOpenId", res, data);
-      return data;
+      // var data = JSON.parse(res);
+      console.log("getUserInfoOpenId", res);
+      return res;
     },
 
     refreshWebAccessToken: function(refreshToken){
