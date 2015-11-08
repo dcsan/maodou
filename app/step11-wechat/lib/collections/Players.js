@@ -20,17 +20,21 @@ Players.getPlayerInfo = function(openid) {
 }
 
 Players.create = function(options) {
-
-  var p = Players.find({openid: options.openid});
-  if (p) {return;}
+  console.log("Players.create", options)
+  var p = Players.findOne({openid: options.openid});
+  if (p) {
+    console.log("already exists");
+    return;
+  }
 
   // else create
   var playerInfo = Players.getPlayerInfo(options.openid);
-  Players.insert({
+  var options = {
     username: playerInfo.username,
     openid: options.openid
-  })
-
+  }
+  Players.insert(options);
+  console.log("new player", options);
 }
 
 if (Meteor.isServer) {
