@@ -21,6 +21,7 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 
 # blaze-html-templates    # Compile .html files into Meteor Blaze views
 
+meteorhacks:npm
 
 react-runtime
 jsx
@@ -33,3 +34,6 @@ static-html
 izzilab:material-ui
 react
 reactive-var
+
+
+npm-container
