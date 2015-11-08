@@ -31,12 +31,9 @@ Players.create = function(options) {
 
   // else create
   var playerInfo = Players.getPlayerInfo(options.openid);
-  var options = {
-    // username: playerInfo.username,
-    nickname: playerInfo.nickname,
-    openid: options.openid
-  }
-  Players.insert(options);
+  // FIXME - switch to openid globally
+  playerInfo.username = playerInfo.nickname;
+  Players.insert(playerInfo);
   console.log("new player", options);
 }
 
