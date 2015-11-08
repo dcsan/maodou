@@ -1,6 +1,7 @@
 
 
 Meteor.methods({
+
     'Wechat/sendMsgToUser': function(username, content) {
       // save to db
       Chatlogs.sendMessageFromServer(username, content);
@@ -8,8 +9,14 @@ Meteor.methods({
       return sendMessageToUser(username, content)
     },
 
-    'Wechat/sendNews': function(username, content) {
-      return sendNews(username, content);
+    // refactor to use openid
+    // 'Wechat/sendNews': function(username, content) {
+    //   return sendNews(username, content);
+    // },
+
+    // TODO refactor to use openid
+    'wc/news': function(openid, content) {
+      return sendNews(openid, content);
     }
 
 });
@@ -32,8 +39,10 @@ function sendMessageToUser(username, content){
   return 'ok';
 }
 
-function sendNews(nickname, content) {
-  var player = Players.findOne({nickname: nickname});
+function sendNews(openid, content) {
+  var player = Players.findOne({openid: openid});
+  var title = "News for " + player.nickname;
+  var description = "custom news every day!";
 
   var params = {
         "touser":player.openid,
@@ -41,18 +50,18 @@ function sendNews(nickname, content) {
         "news":{
             "articles": [
              {
-                 "title":"Happy Day",
-                 "description":"Is Really A Happy Day",
-                 "url":"URL",
+                 "title": title,
+                 "description": description,
+                 //  "url":"URL",
                  "picurl": player.headimgurl
              },
-             {
-                 "title":"Happy Day",
-                 "description":"Is Really A Happy Day",
-                 "url":"URL",
-                 "picurl":"PIC_URL"
-             }
-             ]
+            //  {
+            //      "title":"Happy Day",
+            //      "description":"Is Really A Happy Day",
+            //      "url":"URL",
+            //      "picurl":"PIC_URL"
+            //  }
+           ]
         }
     }
     WechatObject.sendMessageToUser(params);

@@ -65,5 +65,7 @@ Picker.route('/echo', function(params, req, res, next) {
 
   console.log("result str:" + str);
 
+  Meteor.call("wc/sendNews", message.openid, message.content);
+
   res.end(str);
 });
