@@ -2,7 +2,7 @@
 var APP_ID = process.env.WECHAT_APP_ID;
 var APP_SECRET = process.env.WECHAT_APP_SECRET;
 
-
+console.log("Meteor.http", HTTP);
 
 WechatAPI = function(options){
     console.log("wechat api options", options);
@@ -84,15 +84,20 @@ WechatAPI.prototype = {
           secret: this._app_secret,
           grant_type: "client_credential"
       }
-      console.log("getAccessToken params", params);
       // var res = this._get(this.API_ENDPOINT + "/cgi-bin/token", params);
-      var res = HTTP.get(this.API_ENDPOINT + "/cgi-bin/token", params);
+      var url = this.API_ENDPOINT + "/cgi-bin/token";
+      // url += "?grant_type=client_credential&appid=" + this._app_id + "&secret=" + this._app_secret;
+      console.log("getAccessToken params", params);
+      console.log("getAccessToken url", url);
+
+      var res = Meteor.http.get(url, {params: params});
       console.log("res", res);
+      // console.log("res", res.body);
       return res;
     },
 
     refreshAccessToken: function(){
-      console.log("before refresh ----");
+      console.log("refreshAccessToken refresh ----");
       var result = this.getAccessToken();
       console.log("refreshAccessToken got result data", result.data);
 
