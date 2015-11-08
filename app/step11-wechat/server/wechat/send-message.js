@@ -44,7 +44,7 @@ function sendNews(nickname, content) {
                  "title":"Happy Day",
                  "description":"Is Really A Happy Day",
                  "url":"URL",
-                 "picurl":"PIC_URL"
+                 "picurl": player.headimgurl
              },
              {
                  "title":"Happy Day",
