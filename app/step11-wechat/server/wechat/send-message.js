@@ -42,6 +42,20 @@ function sendMessageToUser(username, content){
   return 'ok';
 }
 
+function sendSomething(openid, content) {
+  if (content.match(/news/)) {
+    return sendNews(openid, content)
+  }
+
+  if (content.match(/text/)) {
+    return sendText(openid, content)
+  }
+
+  // default
+  return sendText(openid, content)
+
+}
+
 
 function sendText(openid, content){
   var player = Players.findOne({openid: openid});
