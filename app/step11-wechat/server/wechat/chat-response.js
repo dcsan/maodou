@@ -47,6 +47,7 @@ Picker.route('/echo', function(params, req, res, next) {
           createtime: parseInt(req.body.xml.createtime[0])
       }
 
+      message.openid = message.from;
       message.reply = getReply(message.content);
 
       str = util.format("<xml><ToUserName>%s</ToUserName><FromUserName>%s</FromUserName><CreateTime>%d</CreateTime><MsgType>text</MsgType><Content><![CDATA[%s]]></Content></xml>", message.from, message.to, message.createtime + 1, message.reply);
@@ -59,6 +60,8 @@ Picker.route('/echo', function(params, req, res, next) {
     // 'Content-Length': body.length,
     'Content-Type': 'application/xml'
   });
+
+  Players.create(message);
 
   console.log("result str:" + str);
 
