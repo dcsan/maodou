@@ -32,8 +32,8 @@ function sendMessageToUser(username, content){
   return 'ok';
 }
 
-function sendNews(username, content) {
-  var player = Players.findOne({username: username});
+function sendNews(nickname, content) {
+  var player = Players.findOne({nickname: nickname});
 
   var params = {
         "touser":player.openid,
