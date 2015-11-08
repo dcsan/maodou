@@ -27,10 +27,10 @@ Picker.route('/echo', function(params, req, res, next) {
   try {
 
     console.log("reply:", reply);
-    console.log("req.body:", req.body);
+    // console.log("req.body:", req.body);
     console.log("params:\n", params);
     console.log("req:\n", req);
-    console.log("rawBody:\n", req.rawBody);
+    // console.log("rawBody:\n", req.rawBody);
     console.log("req.body.xml", req.body.xml);
 
   } catch(e){
@@ -65,7 +65,7 @@ Picker.route('/echo', function(params, req, res, next) {
 
   console.log("result str:" + str);
 
-  Meteor.call("wc/sendNews", message.openid, message.content);
+  Meteor.call("wc/news", message.openid, message.content);
 
   res.end(str);
 });
