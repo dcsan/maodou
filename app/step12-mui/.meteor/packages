@@ -31,7 +31,7 @@ meteorhacks:picker
 kadira:flow-router
 kadira:react-layout
 static-html
-izzilab:material-ui
+
 react
 reactive-var
 
@@ -40,3 +40,5 @@ npm-container
 http
 
 dcsan:mui
+
+# izzilab:material-ui
