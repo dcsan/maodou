@@ -29,7 +29,7 @@ FlowRouter.route('/players', {
   action: function(params, queryParams) {
     ReactLayout.render(
       MainLayout, {
-        content: <PlayerListComponent/>
+        content: <PlayersPage/>
       }
     )
   }

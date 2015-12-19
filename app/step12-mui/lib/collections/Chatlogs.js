@@ -6,26 +6,38 @@ Chatlogs.reset = function() {
   var data = [
 
     {
+      openid: 'alpha123',
       usernameTo: "alpha",
       text: "log1",
       usernameFrom: "server",
       createdAt: new Date(),
     },
     {
+      openid: 'alpha123',
       usernameTo: "alpha",
       text: "log two",
       usernameFrom: "server",
       createdAt: new Date(),
     },
     {
+      openid: 'alpha123',
       usernameTo: "alpha",
       text: "log three",
       usernameFrom: "server",
       createdAt: new Date(),
     },
     {
+      openid: 'beta123',
       usernameTo: "beta",
       text: "log one",
+      usernameFrom: "server",
+      createdAt: new Date(),
+    },
+
+    {
+      openid: 'beta123',
+      usernameTo: "beta",
+      text: "beta says something else",
       usernameFrom: "server",
       createdAt: new Date(),
     },

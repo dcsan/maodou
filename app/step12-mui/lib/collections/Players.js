@@ -11,6 +11,19 @@ Players.reset = function() {
       username: 'dc-san',
       openid: 'oEdIzuBk5MmYQFAOIbjMm5tvWQ2U'
     },
+		{
+      username: 'alpha',
+      openid: 'alpha123'
+    },
+		{
+      username: 'beta',
+      openid: 'beta123'
+    },
+		{
+      username: 'charlie',
+      openid: 'charlie123'
+    },
+
     {
       username: '李明',
       openid: 'oEdIzuGXZRZ2mWPQaPRhhWXwUJww'
