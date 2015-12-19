@@ -1,3 +1,8 @@
+// http://www.material-ui.com/#/components/buttons
+// const RaisedButton = require('material-ui/lib/raised-button');
+
+const { RaisedButton } = mui;
+
 PlayerListComponent = React.createClass({
 
 	mixins: [ReactMeteorData],
@@ -26,12 +31,15 @@ PlayerListComponent = React.createClass({
 	},
 
 	render() {
-		return <div>
-			<h2>PlayerList</h2>
-			<ul>
-				{this.playerList()}
-			</ul>
-		</div>
+		return (
+			<div>
+				<h2>PlayerList</h2>
+				<RaisedButton label="HELLO" primary={true}></RaisedButton>
+				<ul>
+					{this.playerList()}
+				</ul>
+			</div>
+		);
 	}
 
 });
