@@ -1,0 +1,38 @@
+TODO
+
+# simple robot logic - DC
+topic engine
+scripts
+fuzzy matching
+
+# topic engine
+
+# robot suggestions
+show robot suggestions
+allow user to approve
+
+# send screen
+UI changes
+  - send text
+  - send news
+  - send image
+  - send link
+
+# send UI - jia
+show send/receive
+
+# add menu
+
+# basic CSS
+improve send form
+
+# refactoring wechat API
+
+# knowledge base editor screen
+  add new KB entries
+  add tags
+  add images?
+  set type: image/text/...
+
+# fuzzy search / NLP reduction
+callout to wit.ai for reduction?
