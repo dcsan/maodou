@@ -17,9 +17,13 @@ PlayerListComponent = React.createClass({
 
   getMeteorData() {
     var handle = Meteor.subscribe('Players');
+    var players = Players.find({}, {sort: {username: 1}}).fetch();
+    console.log('players', players);
+    var playerList = players.map( p => {
+      return p.username;
+    });
     return {
-      players: Players.find({}, {sort: {username: 1}}).fetch(),
-      playerList: ['one', 'two', 'three'],
+      playerList: playerList,
       ready: handle.ready()
     };
   },
@@ -45,10 +49,14 @@ PlayerListComponent = React.createClass({
     }
     // else
 
+    var rawMenu = this.data.playerList;
+    // var rawMenu = ['12345', '23456', '34567'];
+
     return (
       <div>
         <AutoComplete
-          dataSource={this.data.playerList}
+          dataSource={rawMenu}
+          showAllItems = {false}
         />
       </div>
     );
